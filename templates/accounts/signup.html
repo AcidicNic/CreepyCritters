@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+  <h3>Sign Up <small class="text-muted">to create your own wiki pages!</small></h3>
+  <hr>
+      <div class="row">
+        <div class="col">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Sign up</button>
+            </form>
+        </div>
+      </div>
+{% endblock %}

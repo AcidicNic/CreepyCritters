@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'market',
+    'accessories',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -47,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_currentuser.middleware.ThreadLocalUserMiddleware'
 ]
 
 ROOT_URLCONF = 'CreepyCrittersMain.urls'
@@ -54,7 +58,9 @@ ROOT_URLCONF = 'CreepyCrittersMain.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates').replace('\\', '/'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,3 +124,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# auth settings
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+
+
+def get_critter_types(critter_urls):
+    critter_types = [('???', '???')]
+    for str in critter_urls[1:]:
+        critter_types.append((str, str.capitalize()))
+    return critter_types
+
+
+# market settings
+LISTING_TITLE_LENGTH = 32
+CRITTER_TYPE_URLS = ['all', 'reptile', 'amphibian', 'insect', 'spider']
+CRITTER_TYPES = get_critter_types(CRITTER_TYPE_URLS)
