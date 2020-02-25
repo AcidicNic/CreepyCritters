@@ -5,4 +5,4 @@ from .models import Listing
 class ArticleForm(ModelForm):
     class Meta:
         model = Listing
-        fields = ['title', 'desc', 'type', 'species']
+        fields = ['name', 'desc', 'type', 'species', 'critter_img']

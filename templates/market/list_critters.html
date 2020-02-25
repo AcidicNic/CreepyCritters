@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>All Critters</h3>
+{% if listings %}
+    <div class="card-columns">
+        {% for critter in listings %}
+            <div class="card mb-3 w-75">
+                <h5 class="card-header ">{{ critter.name }}, the {{ critter.species }}</h5>
+                <div class="card-body border-dark">
+                    <img src="{{ critter.critter_img.url }}"/>
+
+                    <p class="card-text text-dark">
+                        {{ critter.desc|truncatewords_html:36 }}
+                    </p>
+                    <hr>
+                    <div class="text-right"><a href="{% url 'show_critter' critter.slug %}" title="View Critter">View this boi</a></div>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated {{ critter.modified|date:"SHORT_DATETIME_FORMAT" }} by <b>{{ critter.created_by.username }}</b></small>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-primary" role="alert">No critters! :'(</div>
+{% endif %}
+{% endblock %}

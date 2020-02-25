@@ -123,7 +123,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+# Static
 STATIC_URL = '/static/'
+
+# Media
+MEDIA_ROOT = os.path.join(BASE_DIR, 'img')
+MEDIA_URL = '/img/'
 
 # auth settings
 LOGIN_REDIRECT_URL = "/"
@@ -132,6 +137,7 @@ EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 
+# market settings
 def get_critter_types(critter_urls):
     critter_types = [('???', '???')]
     for str in critter_urls[1:]:
@@ -139,7 +145,6 @@ def get_critter_types(critter_urls):
     return critter_types
 
 
-# market settings
 LISTING_TITLE_LENGTH = 32
 CRITTER_TYPE_URLS = ['all', 'reptile', 'amphibian', 'insect', 'spider']
 CRITTER_TYPES = get_critter_types(CRITTER_TYPE_URLS)

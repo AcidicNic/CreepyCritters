@@ -15,7 +15,7 @@ class CritterListView(ListView):
     def get(self, request):
         """ GET a list of Pages. """
         listings = self.get_queryset().all()
-        return render(request, 'list_critters.html', {
+        return render(request, 'market/list_critters.html', {
             'listings': listings
         })
 
@@ -27,8 +27,8 @@ class CritterDetailView(DetailView):
     def get(self, request, slug):
         """ Returns a specific wiki page by slug. """
         listing = self.get_queryset().get(slug__iexact=slug)
-        return render(request, 'show_critter.html', {
-            'listing': listing
+        return render(request, 'market/show_critter.html', {
+            'critter': listing
         })
 
 

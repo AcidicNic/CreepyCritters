@@ -9,7 +9,7 @@ from django_currentuser.db.models import CurrentUserField
 
 class Listing(models.Model):
     """ A single critter listing """
-    title = models.CharField(max_length=settings.LISTING_TITLE_LENGTH, unique=True, help_text="Listing Title")
+    name = models.CharField(max_length=settings.LISTING_TITLE_LENGTH, unique=True, help_text="Listing Title")
     created_by = CurrentUserField()
     slug = models.CharField(max_length=settings.LISTING_TITLE_LENGTH, blank=True, editable=False,
                             help_text="Unique URL path to access this listing.")
@@ -19,9 +19,10 @@ class Listing(models.Model):
 
     type = models.CharField(max_length=12, choices=settings.CRITTER_TYPES, default='???', help_text="Critter Type")
     species = models.CharField(max_length=24, help_text="Critter Species")
+    critter_img = models.ImageField(upload_to='')
 
     def __str__(self):
-        return self.title
+        return f"{self.name}, the {self.species}"
 
     def get_absolute_url(self):
         """ Returns path for a listing """
@@ -31,7 +32,7 @@ class Listing(models.Model):
     def save(self, *args, **kwargs):
         """ Creates slug automatically when a listing is created """
         if not self.pk:
-            self.slug = slugify(self.title, allow_unicode=True)
+            self.slug = slugify(self.name + " " + self.species, allow_unicode=True)
 
         # Call save on the superclass.
         return super(Listing, self).save(*args, **kwargs)
