@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import CreateView
@@ -32,6 +33,6 @@ class CritterDetailView(DetailView):
         })
 
 
-class AddCritter(CreateView):
+class AddCritter(LoginRequiredMixin, CreateView):
     model = Listing
     form_class = ArticleForm
