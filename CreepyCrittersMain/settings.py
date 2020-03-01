@@ -125,6 +125,10 @@ USE_TZ = True
 
 # Static
 STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 # Media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'img')
@@ -146,5 +150,5 @@ def get_critter_types(critter_urls):
 
 
 LISTING_TITLE_LENGTH = 32
-CRITTER_TYPE_URLS = ['all', 'reptile', 'amphibian', 'insect', 'spider']
+CRITTER_TYPE_URLS = ['all', 'cryptid', 'reptile', 'amphibian', 'insect', 'spider']
 CRITTER_TYPES = get_critter_types(CRITTER_TYPE_URLS)

@@ -1,9 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import DeleteView
 
 from .forms import ArticleForm
 from .models import Listing
@@ -36,3 +38,9 @@ class CritterDetailView(DetailView):
 class AddCritter(LoginRequiredMixin, CreateView):
     model = Listing
     form_class = ArticleForm
+
+
+class DeleteCritter(DeleteView):
+    model = Listing
+    success_url = reverse_lazy('list_critters')
+    template_name = 'market/confirm_delete.html'

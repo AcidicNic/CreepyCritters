@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CritterListView, CritterDetailView, AddCritter
+from .views import CritterListView, CritterDetailView, AddCritter, DeleteCritter
 from django.conf import settings
 
 urlpatterns = [
@@ -15,5 +15,7 @@ urlpatterns = [
 
     # Display a single boi's listing
     path('boi/<str:slug>',
-         CritterDetailView.as_view(), name='show_critter')
+         CritterDetailView.as_view(), name='show_critter'),
+
+    path(r'delete/<pk>/', DeleteCritter.as_view(), name='delete_critter')
 ]

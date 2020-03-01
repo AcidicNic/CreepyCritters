@@ -1,30 +1,50 @@
+{% load static %}
 <!doctype html><html lang="en"><head>
     <meta charset="utf-8">
     <!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
     <script src="https://kit.fontawesome.com/e7c15fdb77.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
     <title>{% block title %}{% endblock %}</title>
 </head><body>
 
     <!-- Collapsable Hamburger Navbar -->
     <div class="pos-f-t sticky-top mb-4">
         <nav class="navbar navbar-dark bg-dark">
-            <!-- Hamburger Button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class='d-flex justify-content-between w-100'>
+                <div class="d-flex justify-content-start">
+                    <!-- Hamburger Button -->
+                    <span>
+                        <button class="navbar-toggler my-2" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </span>
 
-            <!-- Heading & Buttons -->
-            <h1 class='archive_title no_select text-white'>Creepy Critters</h1>
-            {% if user.is_authenticated %}
-                <div class="text-white">Hello, <strong>{{ user.username }}</strong>! {% if user.is_superuser %}(admin){% endif %}</div>
-                <a href="/addListing" class="btn btn-success ml-4">New Listing</a>
-                <a href="/accounts/logout" class="btn btn-danger ml-2">Log Out</a>
-            {% else %}
-                <div class="text-white">Welcome!</div>
-                <a href="/accounts/login" class="btn btn-secondary ml-2">Log In</a>
-                <a href="/accounts/signup" class="btn btn-primary ml-2">Sign Up</a>
-            {% endif %}
+                    <!-- Heading -->
+                    <h1 class='no_select text-white ml-3'>Creepy Critters</h1>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-end my-2">
+                    {% if user.is_authenticated %}
+                        <div class="text-white align-middle my-2">Hello, <strong>{{ user.username }}</strong>! {% if user.is_superuser %}(admin){% endif %}</div>
+                        <span>
+                            <a href="/addListing" class="btn btn-success ml-3">New Listing</a>
+                        </span>
+                        <span>
+                            <a href="/accounts/logout" class="btn btn-danger ml-3">Log Out</a>
+                        </span>
+                    {% else %}
+                        <div class="text-white">Welcome!</div>
+                        <span>
+                        <a href="/accounts/login" class="btn btn-secondary ml-3">Log In</a>
+                        </span>
+                        <span>
+                        <a href="/accounts/signup" class="btn btn-primary ml-3">Sign Up</a>
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
         </nav>
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-dark p-2">
@@ -32,6 +52,13 @@
             </div>
         </div>
     </div>
-    {% block content %}
-    {% endblock %}
-</body>
+    <div class='main_container'>
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body></html>
