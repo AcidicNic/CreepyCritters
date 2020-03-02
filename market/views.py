@@ -1,13 +1,14 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect, Http404
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
 
-from .forms import ArticleForm
+from .forms import CritterForm
 from .models import Listing
 
 
@@ -37,10 +38,17 @@ class CritterDetailView(DetailView):
 
 class AddCritter(LoginRequiredMixin, CreateView):
     model = Listing
-    form_class = ArticleForm
+    form_class = CritterForm
 
 
 class DeleteCritter(DeleteView):
     model = Listing
     success_url = reverse_lazy('list_critters')
     template_name = 'market/confirm_delete.html'
+
+
+def profile(request, username):
+    user = get_object_or_404(User, username=username)
+    listings = Listing.objects.get(created_by=user)
+
+    return render(request, 'market/profile.html', {'user': user, 'listings': listings})

@@ -1,9 +1,24 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<form action="{% url 'createListing' %}" method = "post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
+    <div class='w-75 m-auto'>
+        <form action="{% url 'createListing' %}" method = "post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="m-auto">
+                {{ form.name|as_crispy_field }}
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    {{ form.type|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                    {{ form.species|as_crispy_field }}
+                </div>
+            </div>
+            {{ form.desc|as_crispy_field }}
+            {{ form.critter_img|as_crispy_field }}
+            <input type="submit" class="btn btn-success" value="Submit">
+        </form>
+    </div>
 {% endblock %}

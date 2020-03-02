@@ -2,3 +2,12 @@
     width: 85%;
     margin: 0 auto;
 }
+.title:hover{
+    cursor: pointer;
+}
+.no_select {
+    user-select: none;
+}
+.no_select:hover {
+    cursor: default;
+}

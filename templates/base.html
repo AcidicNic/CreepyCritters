@@ -16,31 +16,41 @@
                     <!-- Hamburger Button -->
                     <span>
                         <button class="navbar-toggler my-2" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
+                            <span class="navbar-toggler-icon"></span>
                         </button>
                     </span>
 
                     <!-- Heading -->
-                    <h1 class='no_select text-white ml-3'>Creepy Critters</h1>
+                    <h1 class='no_select text-white ml-3 title' onClick="location.href='/'">Creepy Critters</h1>
                 </div>
 
                 <!-- Buttons -->
                 <div class="d-flex justify-content-end my-2">
                     {% if user.is_authenticated %}
-                        <div class="text-white align-middle my-2">Hello, <strong>{{ user.username }}</strong>! {% if user.is_superuser %}(admin){% endif %}</div>
                         <span>
                             <a href="/addListing" class="btn btn-success ml-3">New Listing</a>
                         </span>
-                        <span>
-                            <a href="/accounts/logout" class="btn btn-danger ml-3">Log Out</a>
-                        </span>
+                        <div class="btn-group ml-3">
+                            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <strong>{{ user.username }}</strong>! {% if user.is_superuser %}(admin){% endif %}
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{% url 'profile' user %}">Profile</a>
+                                <a class="dropdown-item" href="{# url 'user_details' #}">Account Details</a>
+                                <a class="dropdown-item" href="{# url 'settings' #}">Settings</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/accounts/logout" class="btn btn-danger ml-3">Log Out</a>
+                            </div>
+                        </div>
+
                     {% else %}
-                        <div class="text-white">Welcome!</div>
+                        <div class="text-white align-middle my-2">Welcome!</div>
+
                         <span>
-                        <a href="/accounts/login" class="btn btn-secondary ml-3">Log In</a>
+                            <a href="/accounts/login" class="btn btn-secondary ml-3">Log In</a>
                         </span>
                         <span>
-                        <a href="/accounts/signup" class="btn btn-primary ml-3">Sign Up</a>
+                            <a href="/accounts/signup" class="btn btn-primary ml-3">Sign Up</a>
                         </span>
                     {% endif %}
                 </div>

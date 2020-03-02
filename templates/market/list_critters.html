@@ -8,7 +8,7 @@
             <div class="card mb-3 w-75">
                 <h5 class="card-header ">{{ critter.name }}, the {{ critter.species }}</h5>
                 <div class="card-body border-dark">
-                    <img src="{{ critter.critter_img.url }}"/>
+                    <img class="w-100" src="{{ critter.critter_img.url }}"/>
 
                     <p class="card-text text-dark">
                         {{ critter.desc|truncatewords_html:36 }}

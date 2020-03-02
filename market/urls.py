@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CritterListView, CritterDetailView, AddCritter, DeleteCritter
+from .views import CritterListView, CritterDetailView, AddCritter, DeleteCritter, profile
 from django.conf import settings
 
 urlpatterns = [
@@ -17,5 +17,7 @@ urlpatterns = [
     path('boi/<str:slug>',
          CritterDetailView.as_view(), name='show_critter'),
 
-    path(r'delete/<pk>/', DeleteCritter.as_view(), name='delete_critter')
+    path(r'delete/<pk>/', DeleteCritter.as_view(), name='delete_critter'),
+
+    path(r'profile/<username>/', profile, name='profile')
 ]
