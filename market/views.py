@@ -49,6 +49,6 @@ class DeleteCritter(DeleteView):
 
 def profile(request, username):
     user = get_object_or_404(User, username=username)
-    listings = Listing.objects.get(created_by=user)
+    listings = Listing.objects.filter(created_by=user)
 
-    return render(request, 'market/profile.html', {'user': user, 'listings': listings})
+    return render(request, 'market/profile.html', {'this_user': user, 'listings': listings})

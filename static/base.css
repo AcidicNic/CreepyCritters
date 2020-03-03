@@ -2,12 +2,13 @@
     width: 85%;
     margin: 0 auto;
 }
-.title:hover{
-    cursor: pointer;
-}
-.no_select {
+.title{
     user-select: none;
 }
-.no_select:hover {
-    cursor: default;
+.no_ul, .no_ul:hover, .no_ul:focus {
+    text-decoration: none;
+}
+.small-img {
+    max-width: 250px;
+    max-height: 250px;
 }

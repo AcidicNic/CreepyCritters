@@ -1,28 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3>All Critters</h3>
-{% if listings %}
-    <div class="card-columns">
-        {% for critter in listings %}
-            <div class="card mb-3 w-75">
-                <h5 class="card-header ">{{ critter.name }}, the {{ critter.species }}</h5>
-                <div class="card-body border-dark">
-                    <img class="w-100" src="{{ critter.critter_img.url }}"/>
-
-                    <p class="card-text text-dark">
-                        {{ critter.desc|truncatewords_html:36 }}
-                    </p>
-                    <hr>
-                    <div class="text-right"><a href="{% url 'show_critter' critter.slug %}" title="View Critter">View this boi</a></div>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated {{ critter.modified|date:"SHORT_DATETIME_FORMAT" }} by <b>{{ critter.created_by.username }}</b></small>
-                </div>
-            </div>
-        {% endfor %}
+    <div class="mb-4 mx-auto">
+        <h3>All Critters</h3>
+        {% if listings %}
+                {% for critter in listings %}
+                    <div class="card my-4 mx-auto">
+                        <div class="card-header d-flex justify-content-between">
+                            <h5 class="my-auto">{{ critter.name }}</h5>
+                            <a href="{% url 'show_critter' critter.slug %}" class="my-auto btn btn-success" title="View Critter">View this boi</a>
+                        </div>
+                            <div class="card-body border-dark">
+                                <img class="small-img float-left" src="{{ critter.critter_img.url }}"/>
+                                <div class="d-flex flex-column">
+                                    <div class="d-flex mb-2">
+                                        <span class="mx-3"><strong>Category:</strong> {{ critter.type }}</span>
+                                        <span class="mx-3"><strong>Species:</strong> {{ critter.species }}</span>
+                                        <span class="mx-3"><strong>Age:</strong> {% if critter.age %}{{ critter.age }}{% else %}Unknown{% endif %}</span>
+                                    </div>
+                                    <div class="card-text text-dark mx-3"><strong>Description:</strong> {{ critter.desc|truncatewords_html:32 }}</div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Last updated {{ critter.modified|date:"SHORT_DATETIME_FORMAT" }} by <b>{{ critter.created_by.username }}</b></small>
+                            </div>
+                        </div>
+                {% endfor %}
+        {% else %}
+            <div class="alert alert-primary" role="alert">No critters! :'(</div>
+        {% endif %}
     </div>
-{% else %}
-    <div class="alert alert-primary" role="alert">No critters! :'(</div>
-{% endif %}
 {% endblock %}

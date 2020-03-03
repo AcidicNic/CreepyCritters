@@ -3,10 +3,10 @@
 {% block title %}{{ critter.name }}, the {{ critter.species }}{% endblock %}
 
 {% block content %}
+<div class="card mb-4 w-75 m-auto">
     {% if critter.created_by == user or user.is_superuser %}
         <a href="{% url 'delete_critter' pk=critter.pk %}"><button class="btn btn-danger" type="submit">Delete</button></a>
     {% endif %}
-<div class="card mb-4 w-75 m-auto">
     <h5 class="card-header ">{{ critter.name }}, the {{ critter.species }}</h5>
     <div class="card-body border-dark">
         <img class="w-100" src="{{ critter.critter_img.url }}" alt="Listing photo."/>
