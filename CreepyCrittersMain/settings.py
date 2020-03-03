@@ -153,6 +153,7 @@ def get_critter_types(critter_urls):
     return critter_types
 
 
-LISTING_TITLE_LENGTH = 32
+LISTING_TITLE_LENGTH = 36
+CRITTER_NAME_LENGTH = 16
 CRITTER_TYPE_URLS = ['all', 'cryptid', 'reptile', 'amphibian', 'insect', 'spider']
 CRITTER_TYPES = get_critter_types(CRITTER_TYPE_URLS)

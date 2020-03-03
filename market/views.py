@@ -6,7 +6,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import DeleteView, UpdateView
 
 from .forms import CritterForm
 from .models import Listing
@@ -41,10 +41,15 @@ class AddCritter(LoginRequiredMixin, CreateView):
     form_class = CritterForm
 
 
-class DeleteCritter(DeleteView):
+class DeleteCritter(LoginRequiredMixin, DeleteView):
     model = Listing
-    success_url = reverse_lazy('list_critters')
+    success_url = reverse_lazy('home')
     template_name = 'market/confirm_delete.html'
+
+
+class UpdateListing(LoginRequiredMixin, UpdateView):
+    model = Listing
+    form_class = CritterForm
 
 
 def profile(request, username):

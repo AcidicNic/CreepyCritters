@@ -9,17 +9,31 @@ from django_currentuser.db.models import CurrentUserField
 
 class Listing(models.Model):
     """ A single critter listing """
-    name = models.CharField(max_length=settings.LISTING_TITLE_LENGTH, unique=True, help_text="Listing Title")
-    created_by = CurrentUserField()
-    slug = models.CharField(max_length=settings.LISTING_TITLE_LENGTH, blank=True, editable=False,
+    slug = models.CharField(max_length=32, blank=True, editable=False,
                             help_text="Unique URL path to access this listing.")
-    desc = models.TextField(help_text="Describe your critter")
+    created_by = CurrentUserField()
     created = models.DateTimeField(auto_now_add=True, help_text="The date & time this listing was created.")
     modified = models.DateTimeField(auto_now=True, help_text="The date & time this listing was updated.")
 
+    name = models.CharField(max_length=settings.CRITTER_NAME_LENGTH, help_text="Critter's Name")
+    title = models.CharField(max_length=settings.LISTING_TITLE_LENGTH, default="", help_text="Listing Title")
+    desc = models.TextField(blank=True, default='', help_text="Describe your critter!")
     type = models.CharField(max_length=12, choices=settings.CRITTER_TYPES, default='???', help_text="Critter Type")
     species = models.CharField(max_length=24, help_text="Critter Species")
-    critter_img = models.ImageField(upload_to='')
+    age = models.IntegerField(blank=True, null=True, help_text="Critter Age")
+    age_Format = models.CharField(blank=True, null=True, max_length=3, choices=[('YR', 'Year'), ('YRs', 'Years'), ('MO', 'Months')], help_text="Year/Month")
+    price = models.DecimalField(blank=True, null=True, max_digits=8, decimal_places=2, help_text="Price (USD)")
+    critter_img = models.ImageField(blank=True, null=True, upload_to='')
+
+    @property
+    def show_age(self):
+        if self.age_Format == 'YR':
+            return f"{self.age} years old"
+        return f"{self.age} months old"
+
+    @property
+    def show_price(self):
+        return f"${self.price}"
 
     def __str__(self):
         return f"{self.name}, the {self.species}"
@@ -32,7 +46,8 @@ class Listing(models.Model):
     def save(self, *args, **kwargs):
         """ Creates slug automatically when a listing is created """
         if not self.pk:
-            self.slug = slugify(self.name + " " + self.species, allow_unicode=True)
+            self.slug = slugify(f'{self.name} {self.species} {self.title}', allow_unicode=True)
 
         # Call save on the superclass.
         return super(Listing, self).save(*args, **kwargs)
+

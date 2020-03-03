@@ -1,14 +1,49 @@
-.main_container {
+/* make links look pretty */
+.no_ul, .no_ul:hover, .no_ul:focus {
+    text-decoration: none;
+}
+/* Form File input */
+.hidden {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+}
+.critter_img_btn:hover {
+    cursor: pointer;
+}
+#id_desc {
+    height: 7em;
+}
+div > p
+
+/* Image sizes! */
+.small-img {
+    max-width: 250px;
+    max-height: 250px;
+}
+.med-img {
+    max-width: 400px;
+    max-height: 400px;
+}
+
+/* base stuff */
+.content_wrapper {
     width: 85%;
     margin: 0 auto;
 }
 .title{
     user-select: none;
 }
-.no_ul, .no_ul:hover, .no_ul:focus {
-    text-decoration: none;
+
+/* Footer stuff */
+.footer {
+    position: absolute;
+    width: 100%
 }
-.small-img {
-    max-width: 250px;
-    max-height: 250px;
+html, body {
+   height: 100%;
+   width: 100%;
+   min-height: 100%;
+   padding: 0;
+   margin: 0;
 }
