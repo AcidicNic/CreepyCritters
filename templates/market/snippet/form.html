@@ -1,0 +1,52 @@
+{% load crispy_forms_tags %}
+{% csrf_token %}
+<div class="row">
+    <div class="col-8">
+        {{ form.title|as_crispy_field }}
+    </div>
+    <div class="col-2">
+        {{ form.category|as_crispy_field }}
+    </div>
+    <div class="col-2">
+        {{ form.species|as_crispy_field }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-2">
+        {{ form.age|as_crispy_field }}
+    </div>
+    <div class="col-2">
+        {{ form.age_Format|as_crispy_field }}
+    </div>
+    <div class="col-2">
+        {{ form.sex|as_crispy_field }}
+    </div>
+    <div class="col-6">
+        {{ form.name|as_crispy_field }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-8">
+        {{ form.desc|as_crispy_field }}
+    </div>
+
+    <div class="col-4">
+        <div class="form-group">
+            {{ form.price|as_crispy_field }}
+        </div>
+
+        <div class="form-group">
+            <label for="img_div">Image</label>
+            <div class="row" id="img_div">
+                <div class="btn btn-info critter_img_btn ml-3" onclick="getFile()" onchange="updateFileText()">Add Image</div>
+                <small class="my-auto text-muted col-7" id="file_upload_text">filename.png</small>
+                {% include 'bootstrap4/layout/help_text_and_errors.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <input type="submit" class="btn btn-success mx-auto px-3 py-2" value="Submit Critter">
+</div>
+
+<div class="hidden"><input type="file" name="critter_img" accept="image/*" class="btn btn-secondary" id="id_critter_img" onchange="updateFileText()"/></div>

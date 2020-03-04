@@ -1,14 +1,14 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView
 
-from .forms import CritterForm
+from .forms import AddCritterForm, EditCritterForm
 from .models import Listing
 
 
@@ -38,7 +38,9 @@ class CritterDetailView(DetailView):
 
 class AddCritter(LoginRequiredMixin, CreateView):
     model = Listing
-    form_class = CritterForm
+    success_url = reverse_lazy('home')
+    form_class = AddCritterForm
+    template_name = 'market/add_form.html'
 
 
 class DeleteCritter(LoginRequiredMixin, DeleteView):
@@ -46,10 +48,28 @@ class DeleteCritter(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('home')
     template_name = 'market/confirm_delete.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        """ Only superusers and listing owners can delete """
+        listing = self.get_object()
+        if listing.created_by != self.request.user:
+            if not self.request.user.is_superuser:
+                return redirect(listing)
+        return super(DeleteCritter, self).dispatch(request, *args, **kwargs)
 
-class UpdateListing(LoginRequiredMixin, UpdateView):
+
+class EditCritter(LoginRequiredMixin, UpdateView):
     model = Listing
-    form_class = CritterForm
+    # success_url = reverse_lazy('home')
+    form_class = EditCritterForm
+    template_name = 'market/edit_form.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        """ Only superusers and listing owners can edit """
+        critter = self.get_object()
+        if not critter.created_by == self.request.user:
+            if not self.request.user.is_superuser:
+                return redirect(critter)
+        return super(EditCritter, self).dispatch(request, *args, **kwargs)
 
 
 def profile(request, username):

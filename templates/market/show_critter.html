@@ -3,27 +3,38 @@
 {% block title %}{{ critter.name }}, the {{ critter.species }}{% endblock %}
 
 {% block content %}
+    {% load static %}
     <div class="card my-4 mx-auto">
-        <div class="card-header d-flex justify-content-between">
-            <h5 class="my-auto">{{ critter.name }}</h5>
+        <div class="card-header d-flex justify-content-end">
+            <h5 class="my-auto text-left w-100">{{ critter.title }}</h5>
             {% if critter.created_by == user or user.is_superuser %}
-                <a href="{% url 'delete_critter' pk=critter.pk %}"><button class="btn btn-danger my-auto" type="submit">Delete</button></a>
+                <a href="{% url 'delete_critter' slug=critter.slug %}" class="btn btn-danger my-auto mx-3">Delete</a>
+                <a href="{% url 'edit_critter' slug=critter.slug %}" class="btn btn-secondary my-auto">Edit</a>
             {% endif %}
         </div>
         <div class="card-body border-dark">
-            <img class="med-img float-left" src="{{ critter.critter_img.url }}"/>
-            <div class="d-flex flex-column">
-                <div class="d-flex mb-2">
-                    <span class="mx-3"><strong>Category:</strong> {{ critter.type }}</span>
-                    <span class="mx-3"><strong>Species:</strong> {{ critter.species }}</span>
-                    <span class="mx-3"><strong>Age:</strong> {% if critter.age %}{{ critter.age }}{% else %}Unknown{% endif %}</span>
-                </div>
-                <div class="card-text text-dark mx-3"><strong>Description:</strong> {{ critter.desc|truncatewords_html:32 }}</div>
+            <div class="d-flex justify-content-around mb-4">
+                <span class="mr-2 btn btn-light"><strong>Name:</strong> {{ critter.name }}</span>
+                <span class="mx-2 btn btn-light"><strong>Category:</strong> {{ critter.category }}</span>
+                <span class="mx-2 btn btn-light"><strong>Species:</strong> {{ critter.species }}</span>
+                <span class="mx-2 btn btn-light"><strong>Age:</strong> {% if critter.age %}{{ critter.age }}{% else %}Unknown{% endif %}{% if critter.age_Format %} {{ critter.age_Format }}{% endif %}</span>
+                <span class="mx-2 btn btn-light"><strong>Sex:</strong> {% if critter.sex %}{{ critter.sex }}{% else %}Unknown{% endif %}</span>
+                <span class="ml-2 btn btn-light"><strong>Price:</strong> {% if critter.price %}${{ critter.price }}{% else %}Ask <a href="/profile/{{ critter.created_by.username }}" class="no_ul text-muted">{{ critter.created_by.username }}</a>{% endif %}</span>
+            </div>
+            <div class="row">
+                <span class="col-5">
+                    {% if critter.critter_img %}
+                        <img class="mx-auto w-100" src="{{ critter.critter_img.url }}"/>
+                    {% else %}
+                        <img class="ml-1 w-100" src="{% static 'default-icon.jpg' %}"/>
+                    {% endif %}
+                </span>
+                    {% if critter.desc %}<div class="col-7"><strong>Description:</strong> {{ critter.desc }}</div>{% endif %}
             </div>
         </div>
         <div class="card-footer">
             <small class="text-muted">Last updated {{ critter.modified|date:"SHORT_DATETIME_FORMAT" }} by
-                <a href="/profile/{{ critter.created_by.username }}"><b>{{ critter.created_by.username }}</b></a></small>
+                <a href="/profile/{{ critter.created_by.username }}" class="no_ul"><b>{{ critter.created_by.username }}</b></a></small>
         </div>
     </div>
 {% endblock %}

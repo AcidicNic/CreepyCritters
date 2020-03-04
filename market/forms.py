@@ -2,7 +2,13 @@ from django.forms import ModelForm
 from .models import Listing
 
 
-class CritterForm(ModelForm):
+class AddCritterForm(ModelForm):
     class Meta:
         model = Listing
-        fields = ['name', 'title', 'type', 'species', 'age', 'age_Format', 'price', 'desc', 'critter_img']
+        fields = ['name', 'title', 'category', 'species', 'age', 'sex', 'age_Format', 'price', 'desc', 'critter_img']
+
+
+class EditCritterForm(ModelForm):
+    class Meta:
+        model = Listing
+        fields = ['name', 'title', 'category', 'species', 'age', 'sex', 'age_Format', 'price', 'desc', 'critter_img']

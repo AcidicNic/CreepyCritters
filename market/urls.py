@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CritterListView, CritterDetailView, AddCritter, UpdateListing, DeleteCritter, profile
+from .views import CritterListView, CritterDetailView, AddCritter, EditCritter, DeleteCritter, profile
 from django.conf import settings
 
 urlpatterns = [
@@ -16,11 +16,11 @@ urlpatterns = [
     path('boi/<str:slug>',
          CritterDetailView.as_view(), name='show_critter'),
     # New Listing Form
-    path('addListing/', AddCritter.as_view(), name='createListing'),
-    # Update Listing Form
-    path('update/<str:slug>', UpdateListing.as_view(), name='update_critter'),
+    path('add/', AddCritter.as_view(), name='add_critter'),
+    # Edit Listing
+    path('edit/<slug>/', EditCritter.as_view(), name='edit_critter'),
     # Delete Listing
-    path(r'delete/<pk>/', DeleteCritter.as_view(), name='delete_critter'),
+    path(r'delete/<slug>/', DeleteCritter.as_view(), name='delete_critter'),
 
     # User Profile page!
     path(r'profile/<username>/', profile, name='profile')
