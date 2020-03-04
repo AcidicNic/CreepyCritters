@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
+import django_heroku
 
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
@@ -88,12 +87,12 @@ WSGI_APPLICATION = 'CreepyCrittersMain.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+
 DATABASES = {
-    'default': dj_database_url.config()
-        # {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        # }
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
 }
 
 # Password validation
@@ -135,7 +134,7 @@ USE_TZ = True
 
 # Static
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
@@ -167,3 +166,5 @@ LISTING_TITLE_LENGTH = 54
 CRITTER_NAME_LENGTH = 16
 CRITTER_TYPE_URLS = ['all', 'cryptid', 'reptile', 'amphibian', 'insect', 'spider']
 CRITTER_TYPES = get_critter_types(CRITTER_TYPE_URLS)
+
+django_heroku.settings(locals())
