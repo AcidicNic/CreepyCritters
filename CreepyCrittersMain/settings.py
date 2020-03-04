@@ -31,7 +31,7 @@ SECRET_KEY = '5_6e&e2*%1tujxx%w64w3pd8=4ka&a*dpqomf+jtemh2cl%ej('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'creepy-critters.herokuapp.com']
+ALLOWED_HOSTS = ['creepy-critters.herokuapp.com']
 
 
 # Static
