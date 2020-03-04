@@ -1,0 +1,31 @@
+{% load crispy_forms_tags %}
+{% csrf_token %}
+<div class="row">
+    <div class="col-8">
+        {{ form.title|as_crispy_field }}
+    </div>
+    <div class="col-4">
+        {{ form.price|as_crispy_field }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-8">
+        {{ form.info|as_crispy_field }}
+    </div>
+
+    <div class="col-4">
+        <div class="form-group">
+            <label for="img_div">Image*</label>
+            <div class="row" id="img_div">
+                <div class="btn btn-info item_img_btn ml-3" onclick="getFile()" onchange="updateFileText()">Add Image</div>
+                <small class="my-auto text-muted col-7" id="file_upload_text">filename.png</small>
+                {% include 'bootstrap4/layout/help_text_and_errors.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <input type="submit" class="btn btn-success mx-auto px-3 py-2" value="Submit Item">
+</div>
+
+<div class="hidden"><input type="file" name="item_img" accept="image/*" class="btn btn-secondary" id="id_item_img" onchange="updateFileText()"/></div>

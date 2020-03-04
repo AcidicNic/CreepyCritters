@@ -2,6 +2,10 @@
 
 {% block title %}{{ critter.name }}, the {{ critter.species }}{% endblock %}
 
+{% block navbar_btn %}
+<a href="/shop" class="btn btn-info">Shop</a>
+{% endblock %}
+
 {% block content %}
     {% load static %}
     <div class="card my-4 mx-auto">

@@ -15,8 +15,8 @@ class Listing(models.Model):
     slug = models.CharField(max_length=32, blank=True, editable=False,
                             help_text="Unique URL path to access this listing.")
     created_by = CurrentUserField()
-    created = models.DateTimeField(auto_now_add=True, help_text="The date & time this listing was created.")
-    modified = models.DateTimeField(auto_now=True, help_text="The date & time this listing was updated.")
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     name = models.CharField(max_length=settings.CRITTER_NAME_LENGTH, help_text="Critter's Name")
     title = models.CharField(max_length=settings.LISTING_TITLE_LENGTH, default="", help_text="Listing Title")
@@ -42,7 +42,7 @@ class Listing(models.Model):
     def save(self, *args, **kwargs):
         """ Creates slug automatically when a listing is created """
         if not self.pk:
-            self.slug = slugify(self.name+" "+''.join(choice(ascii_letters + digits) for _ in range(6)), allow_unicode=True)
+            self.slug = slugify(self.name+" "+''.join(choice(ascii_letters + digits) for _ in range(4)), allow_unicode=True)
 
         # Call save on the superclass.
         return super(Listing, self).save(*args, **kwargs)

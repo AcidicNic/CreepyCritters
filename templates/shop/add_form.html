@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Add Item (Admin){% endblock %}
+
+{% block navbar_btn %}
+<a href="/" class="btn btn-info">Critters</a>
+{% endblock %}
+
+{% block content %}
+    <div class='w-75 mx-auto my-4'>
+        <form action="{% url 'add_item' %}" method="post" enctype="multipart/form-data">
+            {% include 'shop/form.html' %}
+        </form>
+    </div>
+
+    <script>
+        function getFile() {
+          document.getElementById("id_item_img").click();
+        }
+        function updateFileText() {
+            document.getElementById("file_upload_text").innerHTML = document.getElementById("id_item_img").files[0].name;
+        }
+    </script>
+{% endblock %}

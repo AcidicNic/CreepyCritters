@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}{% endblock %}
+{% block title %}CC: {{ this_user.username }}'s Profile{% endblock %}
+
+{% block navbar_btn %}
+<a href="/shop" class="btn btn-info">Shop</a>
+{% endblock %}
 
 {% block content %}
     {% load static %}

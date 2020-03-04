@@ -22,11 +22,11 @@ urlpatterns = [
     # Admin Site
     path('admin/', admin.site.urls),
 
-    # Maketplace app
+    # Marketplace app
     path('', include('market.urls')),
 
     # Accessories Shop app
-    # path('shop/', include('accessories.urls')),
+    path('shop/', include('accessories.urls')),
 
     # Accounts App
     path('accounts/', include('accounts.urls')),

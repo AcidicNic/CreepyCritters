@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    Hey, are you sure you want to delete the listing titled {{ object.title }}. For {{ object.name }} the {{ object.category }}?
+    Hey, are you sure you want to delete the listing for {{ object.title }}?
     <form method="post">
       {% csrf_token %}
       <button type="submit" class="btn btn-danger">Yes, delete it forever!</button>

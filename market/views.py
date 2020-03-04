@@ -3,13 +3,24 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView
-
 from .forms import AddCritterForm, EditCritterForm
 from .models import Listing
+from accessories.models import Item
+
+
+class CreepyCrittersHome(TemplateView):
+    """ List all critters and Shop Items """
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CreepyCrittersHome, self).get_context_data(**kwargs)
+        context['listings'] = Listing.objects.get_queryset().all()
+        context['items'] = Item.objects.get_queryset().all()
+        return context
 
 
 class CritterListView(ListView):
@@ -38,14 +49,13 @@ class CritterDetailView(DetailView):
 
 class AddCritter(LoginRequiredMixin, CreateView):
     model = Listing
-    success_url = reverse_lazy('home')
     form_class = AddCritterForm
     template_name = 'market/add_form.html'
 
 
 class DeleteCritter(LoginRequiredMixin, DeleteView):
     model = Listing
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('critter_home')
     template_name = 'market/confirm_delete.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -59,7 +69,6 @@ class DeleteCritter(LoginRequiredMixin, DeleteView):
 
 class EditCritter(LoginRequiredMixin, UpdateView):
     model = Listing
-    # success_url = reverse_lazy('home')
     form_class = EditCritterForm
     template_name = 'market/edit_form.html'
 

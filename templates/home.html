@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Creepy Critters: Home{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="row">
+        <div class="col-6">
+            <h3>Shop for Creepy Critter Accessories!</h3>
+                {% if items %}
+                    <div class="d-flex flex-wrap mb-4">
+                    {% for item in items %}
+                        <div class="card m-3">
+                            <div class="card-header">
+                                <a href="{% url 'show_item' slug=item.slug %}" class="my-auto btn btn-light" title="{{ item.title }}">{{ item.title }}</a>
+                            </div>
+                            <div class="card-body border-dark">
+                                {% if item.item_img %}
+                                    <img class="small-img rounded mb-3 mx-auto" src="{{ item.item_img.url }}"/>
+                                {% else %}
+                                    <img class="small-img rounded mb-3 mx-auto" src="{% static 'default-icon.jpg' %}"/>
+                                {% endif %}
+                                <br>
+                                <div class="card-text text-dark mx-auto"><b>Info:</b><br>{{ item.info|truncatewords_html:12 }}</div>
+                                <div class="d-flex justify-items-end">
+                                    <a href="{% url 'show_item' slug=item.slug %}" class="btn btn-light" title="{{ item.title }}">${{ item.price }}</a>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Posted {{ item.created|date:"SHORT_DATETIME_FORMAT" }} by
+                                    <a href="/profile/{{ item.created_by.username }}" class="no_ul"><b>{{ item.created_by.username }}</b></a></small>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-primary" role="alert">No Items! :'(</div>
+            {% endif %}
+        </div>
+
+        <div class="col-6">
+            <h3>All Critters</h3>
+            {% if listings %}
+                {% for critter in listings %}
+                    <div class="card my-4 mx-auto">
+                        <div class="card-header d-flex justify-content-between">
+                            <h5 class="my-auto">{{ critter.title }}</h5>
+                            <a href="{% url 'show_critter' slug=critter.slug %}" class="my-auto btn btn-success" title="View Critter">View this boi</a>
+                        </div>
+                        <div class="card-body border-dark">
+                            {% if critter.critter_img %}
+                                <img class="small-img float-left" src="{{ critter.critter_img.url }}"/>
+                            {% else %}
+                                <img class="small-img float-left" src="{% static 'default-icon.jpg' %}"/>
+                            {% endif %}
+                            <div class="d-flex flex-column">
+                                <div class="d-flex mb-2">
+                                    <span class="mx-3"><strong>Name:</strong> {{ critter.name }}</span>
+                                    <span class="mx-3"><strong>Category:</strong> {{ critter.category }}</span>
+                                    <span class="mx-3"><strong>Species:</strong> {{ critter.species }}</span>
+                                </div>
+                                <div class="d-flex mb-2">
+                                    <span class="mx-3"><strong>Price:</strong> {% if critter.price %}${{ critter.price }}{% else %}Ask <a href="/profile/{{ critter.created_by.username }}" class="no_ul text-muted">{{ critter.created_by.username }}</a>{% endif %}</span>
+                                    <span class="mx-3"><strong>Sex:</strong> {% if critter.sex %}{{ critter.sex }}{% else %}Unknown{% endif %}</span>
+                                    <span class="mx-3"><strong>Age:</strong> {% if critter.age %}{{ critter.age }}{% else %}Unknown{% endif %}{% if critter.age_Format %} {{ critter.age_Format }}{% endif %}</span>
+                                </div>
+                                {% if critter.desc %}<div class="card-text text-dark mx-3 my-auto"><strong>Description:</strong> {{ critter.desc|truncatewords_html:32 }}</div>{% endif %}
+
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated {{ critter.modified|date:"SHORT_DATETIME_FORMAT" }} by
+                                <a href="/profile/{{ critter.created_by.username }}" class="no_ul"><b>{{ critter.created_by.username }}</b></a></small>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-primary" role="alert">No critters! :'(</div>
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

@@ -25,10 +25,18 @@
 
                 {#Buttons#}
                 <div class="d-flex justify-content-end my-2">
+                    <span>
+                        {% block navbar_btn %}{% endblock %}
+                    </span>
                     {% if user.is_authenticated %}
                         <span>
-                            <a href="{% url 'add_critter' %}" class="btn btn-success ml-3">New Listing</a>
+                            <a href="{% url 'add_critter' %}" class="btn btn-success ml-3">New Critter</a>
                         </span>
+                        {% if user.is_superuser %}
+                            <span>
+                                <a href="{% url 'add_item' %}" class="btn btn-success ml-3">New Shop Item</a>
+                            </span>
+                        {% endif %}
                         <div class="btn-group ml-3">
                             <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <strong>{{ user.username }}</strong>! {% if user.is_superuser %}(admin){% endif %}
@@ -54,8 +62,8 @@
             </div>
         </nav>
         <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-dark p-2">
-                dropdown content!
+            <div class="bg-dark text-white px-4 pb-4 pt-3">
+                This dropdown navbar is still under construction :)
             </div>
         </div>
     </div>

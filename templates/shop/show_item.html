@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}CC Shop: {{ item.title }}{% endblock %}
+
+{% block navbar_btn %}
+<a href="/" class="btn btn-info">Critters</a>
+{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="card my-4 mx-auto">
+        <div class="card-header d-flex justify-content-end">
+            <h5 class="my-auto mr-auto">{{ item.title }}</h5>
+            <span class="btn btn-light mx-3 my-auto"><strong>Price:</strong> ${{ critter.price }}</span>
+            {% if user.is_superuser %}
+                <a href="{% url 'delete_item' slug=item.slug %}" class="btn btn-danger my-auto mr-3">Delete</a>
+                <a href="{% url 'edit_item' slug=item.slug %}" class="btn btn-secondary my-auto">Edit</a>
+            {% endif %}
+        </div>
+        <div class="card-body border-dark">
+            <div class="row">
+                <span class="col-5">
+                    {% if item.item_img %}
+                        <img class="mx-auto w-100 rounded" src="{{ item.item_img.url }}"/>
+                    {% else %}
+                        <img class="ml-1 w-100 rounded" src="{% static 'default-icon.jpg' %}"/>
+                    {% endif %}
+                </span>
+                <div class="col-7"><strong>Description:</strong> {{ item.info }}</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Item in Stock on {{ item.modified|date:"SHORT_DATETIME_FORMAT" }}</small>
+        </div>
+    </div>
+{% endblock %}

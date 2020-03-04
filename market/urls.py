@@ -1,16 +1,18 @@
 from django.urls import path
-from .views import CritterListView, CritterDetailView, AddCritter, EditCritter, DeleteCritter, profile
+from .views import CritterListView, CritterDetailView, AddCritter, EditCritter, DeleteCritter, profile, CreepyCrittersHome
 from django.conf import settings
 
 urlpatterns = [
-    # URLs for every critter type (defined in settings!)
+    # Home Page
+    # path('', CreepyCrittersHome.as_view(), name='home'),
+
+    # All Critters
+    path('', CritterListView.as_view(), name='critter_home'),
+
+    # TODO: URLs for every critter type
     path(r'critters/<str:type>', CritterListView.as_view(), name='critter_type'),
-
-    # Search for critters
+    # TODO: Search for critters
     path(r'critters/search/<str:type>', CritterListView.as_view(), name='critter_search'),
-
-    # All Critters / Home Page
-    path('', CritterListView.as_view(), name='home'),
 
     # Display a single boi's listing
     path('boi/<str:slug>',
