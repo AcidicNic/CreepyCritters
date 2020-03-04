@@ -39,8 +39,9 @@
 
 /* Footer stuff */
 .footer {
-    position: absolute;
-    width: 100%
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 }
 html, body {
    height: 100%;
