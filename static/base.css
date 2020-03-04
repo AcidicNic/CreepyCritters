@@ -38,10 +38,14 @@
 }
 
 /* Footer stuff */
-.footer {
-    width: 100%;
-    bottom: 0;
-    line-height: 2em;
-    position: absolute;
+html, body {
+  height: 100%;
 }
 
+.main_container {
+  flex: 1 0 auto;
+}
+
+#sticky-footer {
+  flex-shrink: 0;
+}

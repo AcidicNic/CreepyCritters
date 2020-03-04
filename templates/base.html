@@ -72,23 +72,10 @@
         {% endblock %}
     </div>
     </div>
-{#    <script>#}
-{#        $(function() {#}
-{#            var footer = $(".footer");#}
-{#            var windowHeight = $(window).height();#}
-{#            var contHeight = $(".main_container").height();#}
-{#            var footHeight = footer.height();#}
-{#            var testHeight = windowHeight - footHeight;#}
-{##}
-{#            if (contHeight < testHeight) {#}
-{#                footer.css("bottom", "0");#}
-{#                footer.css("left", "0");#}
-{#             }#}
-{#        });#}
-{#    </script>#}
 
-    <footer class="sticky-bottom p-4 mt-4 bg-light text-center footer">
-        <div class="d-flex justify-content-center">
+
+    <footer id="sticky-footer" class="w-100 p-4 mt-4 bg-light text-center">
+        <div class="container d-flex justify-content-center">
             <span class="text-muted mx-3">A marketplace for reptiles, bugs, and cryptids!</span>
             <a class="no_ul text-muted mx-3" href="https://github.com/AcidicNic"><i class="fab fa-github"></i> AcidicNic</a>
         </div>
