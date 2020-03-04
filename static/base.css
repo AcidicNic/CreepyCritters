@@ -39,14 +39,9 @@
 
 /* Footer stuff */
 .footer {
-    position: fixed;
     width: 100%;
     bottom: 0;
+    line-height: 2em;
+    position: absolute;
 }
-html, body {
-   height: 100%;
-   width: 100%;
-   min-height: 100%;
-   padding: 0;
-   margin: 0;
-}
+
