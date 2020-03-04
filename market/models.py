@@ -12,7 +12,7 @@ from django_currentuser.db.models import CurrentUserField
 
 class Listing(models.Model):
     """ A single critter listing """
-    slug = models.CharField(max_length=32, blank=True, editable=False,
+    slug = models.CharField(max_length=21, blank=True, editable=False,
                             help_text="Unique URL path to access this listing.")
     created_by = CurrentUserField()
     created = models.DateTimeField(auto_now_add=True)

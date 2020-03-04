@@ -7,7 +7,7 @@ from django.views.generic import CreateView, TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView
-from .forms import AddCritterForm, EditCritterForm
+from .forms import CritterForm
 from .models import Listing
 from accessories.models import Item
 
@@ -49,7 +49,7 @@ class CritterDetailView(DetailView):
 
 class AddCritter(LoginRequiredMixin, CreateView):
     model = Listing
-    form_class = AddCritterForm
+    form_class = CritterForm
     template_name = 'market/add_form.html'
 
 
@@ -69,7 +69,7 @@ class DeleteCritter(LoginRequiredMixin, DeleteView):
 
 class EditCritter(LoginRequiredMixin, UpdateView):
     model = Listing
-    form_class = EditCritterForm
+    form_class = CritterForm
     template_name = 'market/edit_form.html'
 
     def dispatch(self, request, *args, **kwargs):
