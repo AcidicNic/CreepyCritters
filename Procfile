@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn CreepyCrittersMain.wsgi:application
+web: gunicorn CreepyCrittersMain.wsgi:application --log-file -

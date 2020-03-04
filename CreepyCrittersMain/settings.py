@@ -11,8 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import django_heroku
-
+# import django_heroku
+import dj_database_url
+db_from_env = dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -28,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5_6e&e2*%1tujxx%w64w3pd8=4ka&a*dpqomf+jtemh2cl%ej('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'creepy-critters.herokuapp.com']
 
@@ -51,7 +52,6 @@ INSTALLED_APPS = [
     'accounts',
     'crispy_forms',
     'whitenoise.runserver_nostatic',
-
 ]
 
 MIDDLEWARE = [
@@ -99,6 +99,8 @@ DATABASES = {
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
 }
+
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -165,4 +167,4 @@ CRITTER_NAME_LENGTH = 16
 CRITTER_TYPE_URLS = ['all', 'cryptid', 'reptile', 'amphibian', 'insect', 'spider']
 CRITTER_TYPES = get_critter_types(CRITTER_TYPE_URLS)
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
