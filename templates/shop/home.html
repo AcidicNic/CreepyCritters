@@ -3,7 +3,7 @@
 {% block title %}Creepy Shop{% endblock %}
 
 {% block navbar_btn %}
-<a href="/" class="btn btn-info">Critters</a>
+    <a href="/" class="btn btn-info">Critters</a>
 {% endblock %}
 
 {% block content %}
@@ -18,12 +18,14 @@
                             <a href="{% url 'show_item' slug=item.slug %}" class="my-auto btn btn-light" title="{{ item.title }}">{{ item.title }}</a>
                         </div>
                         <div class="card-body border-dark">
-                            {% if item.item_img %}
-                                <img class="small-img float-left rounded mb-3" src="{{ item.item_img.url }}"/>
-                            {% else %}
-                                <img class="small-img float-left rounded mb-3" src="{% static 'default-icon.jpg' %}"/>
-                            {% endif %}
-                            <div class="card-text text-dark my-3"><b>Info:</b><br>{{ item.info|truncatewords_html:5 }}</div>
+                            <div class="col">
+                                {% if item.item_img %}
+                                    <img class="small-img rounded mb-3" src="{{ item.item_img.url }}"/>
+                                {% else %}
+                                    <img class="small-img rounded mb-3" src="{% static 'default-icon.jpg' %}"/>
+                                {% endif %}
+                                <div class="card-text text-dark my-3"><b>Info:</b><br>{{ item.info|truncatewords_html:5 }}</div>
+                            </div>
                             <div class="d-flex justify-items-end">
                                 <a href="{% url 'show_item' slug=item.slug %}" class="btn btn-light" title="{{ item.title }}">${{ item.price }}</a>
                             </div>
