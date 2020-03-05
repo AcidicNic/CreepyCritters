@@ -75,7 +75,7 @@
     </div>
     </div>
 
-    <footer id="footer" class="w-100 p-4 bg-light footer">
+    <footer id="footer" class="w-100 mt-4 p-4 bg-light footer">
     <div class="container text-center">
         <span class="text-muted mx-3">A marketplace for reptiles, bugs, and cryptids!</span>
         <a class="no_ul text-muted mx-3" href="https://github.com/AcidicNic"><i class="fab fa-github"></i> AcidicNic</a>
@@ -84,12 +84,12 @@
 
     <script>
         function footerFix() {
-            const main_cont = document.getElementById("main_container");
+            const body = document.getElementById("body");
             const html_ele = document.getElementById("html");
             const footer = document.getElementById("footer");
             let new_height = html_ele.clientHeight - footer.outerHeight(true);
-            if (main_cont.clientHeight < html_ele.clientHeight) {
-                main_cont.style.height = new_height.toString() + "px";
+            if (body.clientHeight < html_ele.clientHeight) {
+                body.style.height = new_height.toString() + "px";
                 footer.style.bottom = "0px";
             }
         }
