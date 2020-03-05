@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div class="content_wrapper">
+    <div id="content_wrapper">
         {% block content %}
         {% endblock %}
     </div>
@@ -84,7 +84,7 @@
 
     <script>
         $(document).ready(function(){
-            const body_ele = document.getElementById("body");
+            const body_ele = document.getElementById("content_wrapper");
             const html_ele = document.getElementById("html");
             const footer = document.getElementById("footer");
             let new_height = html_ele.clientHeight - footer.clientHeight;

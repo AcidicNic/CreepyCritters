@@ -42,9 +42,6 @@ html, body {
   position: relative;
   min-height: 100%;
 }
-#main_container {
-  margin-bottom: 60px; /* Margin bottom by footer height */
-}
 .footer {
   bottom: 0;
   width: 100%;
