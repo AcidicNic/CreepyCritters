@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div id="content_wrapper">
+    <div class="content_wrapper">
         {% block content %}
         {% endblock %}
     </div>
@@ -84,13 +84,13 @@
 
     <script>
         $(document).ready(function(){
-            const body_ele = document.getElementById("content_wrapper");
+            const main_cont = document.getElementById("main_container");
             const html_ele = document.getElementById("html");
             const footer = document.getElementById("footer");
             let new_height = html_ele.clientHeight - footer.clientHeight;
-            if (body_ele.clientHeight < html_ele.clientHeight) {
-            body_ele.style.height = new_height.toString() + "px";
-            footer.style.bottom = "0px";
+            if (main_cont.clientHeight < html_ele.clientHeight) {
+                main_cont.style.height = new_height.toString() + "px";
+                footer.style.bottom = "0px";
             }
         })
     </script>
