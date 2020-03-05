@@ -33,7 +33,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['creepy-critters.herokuapp.com']
 
-
 # Static
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
