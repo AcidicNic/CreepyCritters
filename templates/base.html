@@ -6,6 +6,24 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'base.css' %}">
     <title>{% block title %}{% endblock %}</title>
+    <script>
+        function footerFix() {
+            const body = $("#body");
+            const html_ele = $("#html");
+            const footer = $("#footer");
+            let new_height = html_ele.height() - footer.outerHeight(true);
+            if (body.height() < html_ele.height()) {
+                body.css( "height", new_height + "px" );
+                footer.style.bottom = "0";
+            }
+        }
+        $(document).ready(function () {
+            footerFix();
+        });
+        $(window).resize(function () {
+            footerFix();
+        });
+    </script>
 </head><body id="body">
     <div id='main_container'>
     {# Collapsable Hamburger Navbar#}
@@ -81,29 +99,9 @@
         <a class="no_ul text-muted mx-3" href="https://github.com/AcidicNic"><i class="fab fa-github"></i> AcidicNic</a>
     </div>
     </footer>
-
-    <script>
-        function footerFix() {
-            const body = document.getElementById("body");
-            const html_ele = document.getElementById("html");
-            const footer = document.getElementById("footer");
-            let new_height = html_ele.clientHeight - footer.outerHeight(true);
-            if (body.clientHeight < html_ele.clientHeight) {
-                body.style.height = new_height.toString() + "px";
-                footer.style.bottom = "0px";
-            }
-        }
-        $(document).ready(function () {
-            footerFix();
-        });
-        $(window).resize(function () {
-            footerFix();
-        });
-    </script>
-
     {#Bootstrap JS#}
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+{#    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>#}
+{#    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>#}
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 </body>
