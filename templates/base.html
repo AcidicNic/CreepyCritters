@@ -28,7 +28,7 @@
 </head><body id="body">
     <div id='main_container'>
     {# Collapsable Hamburger Navbar#}
-    <div class="pos-f-t sticky-top mb-4">
+    <div class="pos-f-t sticky-top mb-4" id="navbar">
         <nav class="navbar navbar-dark bg-dark">
             <div class='d-flex justify-content-between w-100'>
                 <div class="d-flex justify-content-start">
@@ -40,7 +40,7 @@
                     </span>
 
                     {# Heading #}
-                    <a class='h1 no_ul text-white mx-3 title' href='/'>Creepy Critters</a>
+                    <a class='h1 no_ul text-white mx-3 title' href={% block back_url %}{% endblock %}>Creepy Critters</a>
                     <span class="my-auto">
                         {% block navbar_btn %}{% endblock %}
                     </span>

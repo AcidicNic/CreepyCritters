@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block back_url %}"/"{% endblock %}
+
 {% block content %}
     Hey, are you sure you want to delete the listing titled {{ object.title }}. For {{ object.name }} the {{ object.category }}?
     <form method="post">
