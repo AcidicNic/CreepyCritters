@@ -83,7 +83,7 @@
     </footer>
 
     <script>
-        $(document).ready(function(){
+        function footerFix() {
             const main_cont = document.getElementById("main_container");
             const html_ele = document.getElementById("html");
             const footer = document.getElementById("footer");
@@ -92,7 +92,9 @@
                 main_cont.style.height = new_height.toString() + "px";
                 footer.style.bottom = "0px";
             }
-        })
+        }
+        $(document).ready(footerFix());
+        $(window).resize(footerFix());
     </script>
 
     {#Bootstrap JS#}
