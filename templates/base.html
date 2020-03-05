@@ -87,7 +87,7 @@
             const main_cont = document.getElementById("main_container");
             const html_ele = document.getElementById("html");
             const footer = document.getElementById("footer");
-            let new_height = html_ele.clientHeight - footer.clientHeight;
+            let new_height = html_ele.clientHeight - footer.outerHeight(true);
             if (main_cont.clientHeight < html_ele.clientHeight) {
                 main_cont.style.height = new_height.toString() + "px";
                 footer.style.bottom = "0px";
