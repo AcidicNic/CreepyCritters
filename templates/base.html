@@ -93,8 +93,12 @@
                 footer.style.bottom = "0px";
             }
         }
-        $(document).ready(footerFix());
-        $(window).resize(footerFix());
+        $(document).ready(function () {
+            footerFix();
+        });
+        $(window).resize(function () {
+            footerFix();
+        });
     </script>
 
     {#Bootstrap JS#}
