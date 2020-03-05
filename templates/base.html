@@ -1,11 +1,11 @@
 {% load static %}
-<!doctype html><html lang="en"><head>
+<!doctype html><html lang="en" id="html"><head>
     <meta charset="utf-8">
     <script src="https://kit.fontawesome.com/e7c15fdb77.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'base.css' %}">
     <title>{% block title %}{% endblock %}</title>
-</head><body>
+</head><body id="body">
     <div class='main_container'>
     {# Collapsable Hamburger Navbar#}
     <div class="pos-f-t sticky-top mb-4">
@@ -74,12 +74,23 @@
     </div>
     </div>
 
-    <footer class="w-100 p-4 bg-light footer">
+    <footer id="footer" class="w-100 p-4 bg-light footer">
     <div class="container text-center">
         <span class="text-muted mx-3">A marketplace for reptiles, bugs, and cryptids!</span>
         <a class="no_ul text-muted mx-3" href="https://github.com/AcidicNic"><i class="fab fa-github"></i> AcidicNic</a>
     </div>
     </footer>
+
+    <script>
+        const body_ele = document.getElementById("body");
+        const html_ele = document.getElementById("html");
+        const footer = document.getElementById("footer");
+        let new_height = html_ele.clientHeight - footer.clientHeight;
+        body_ele.style.height = new_height.toString();
+        console.log(body_ele.clientHeight);
+        console.log(new_height.toString());
+
+    </script>
 
     {#Bootstrap JS#}
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
