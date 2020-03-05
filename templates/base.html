@@ -84,14 +84,14 @@
 
     <script>
         $(document).ready(function(){
-            const main_container = document.getElementById("main_container");
+            const bode_ele = document.getElementById("body");
             const html_ele = document.getElementById("html");
             const footer = document.getElementById("footer");
             let new_height = html_ele.clientHeight - footer.clientHeight;
-            main_container.style.height = new_height.toString() + "px";
+            if (body_ele.clientHeight < html_ele.clientHeight) {
+            bode_ele.style.height = new_height.toString() + "px";
             footer.style.bottom = "0px";
-            console.log(main_container.clientHeight);
-            console.log(new_height.toString() + "px");
+            }
         })
     </script>
 
