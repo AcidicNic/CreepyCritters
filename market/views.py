@@ -30,9 +30,7 @@ class CritterListView(ListView):
     def get(self, request):
         """ GET a list of Pages. """
         listings = self.get_queryset().all()
-        return render(request, 'market/list_critters.html', {
-            'listings': listings
-        })
+        return render(request, 'market/list_critters.html', {'listings': listings})
 
 
 class CritterDetailView(DetailView):

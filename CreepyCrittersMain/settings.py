@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 # import django_heroku
 import dj_database_url
+import secret
 db_from_env = dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
@@ -26,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '5_6e&e2*%1tujxx%w64w3pd8=4ka&a*dpqomf+jtemh2cl%ej('
+SECRET_KEY = secret.dj_secret
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'market',
     'accessories',
     'accounts',
@@ -141,10 +143,8 @@ USE_TZ = True
 
 
 # Media
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'img')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'img')
-# MEDIA_URL = '/img/'
-MEDIA_URL = STATIC_URL
+MEDIA_URL = '/img/'
 
 # auth settings
 LOGIN_REDIRECT_URL = "/"

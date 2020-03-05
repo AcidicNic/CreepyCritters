@@ -6,7 +6,6 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from django.conf import settings
-from django_currentuser.middleware import get_current_user, get_current_authenticated_user
 from django_currentuser.db.models import CurrentUserField
 
 
