@@ -84,12 +84,12 @@
 
     <script>
         $(document).ready(function(){
-            const bode_ele = document.getElementById("body");
+            const body_ele = document.getElementById("body");
             const html_ele = document.getElementById("html");
             const footer = document.getElementById("footer");
             let new_height = html_ele.clientHeight - footer.clientHeight;
             if (body_ele.clientHeight < html_ele.clientHeight) {
-            bode_ele.style.height = new_height.toString() + "px";
+            body_ele.style.height = new_height.toString() + "px";
             footer.style.bottom = "0px";
             }
         })
