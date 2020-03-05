@@ -46,7 +46,6 @@ html {
   margin-bottom: 60px; /* Margin bottom by footer height */
 }
 .footer {
-  /*position: absolute;*/
   bottom: 0;
   width: 100%;
 }

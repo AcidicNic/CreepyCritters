@@ -20,14 +20,15 @@
                     </span>
 
                     {# Heading #}
-                    <a class='h1 no_ul text-white ml-3 title' href='/'>Creepy Critters</a>
+                    <a class='h1 no_ul text-white mx-3 title' href='/'>Creepy Critters</a>
+                    <span class="my-auto">
+                        {% block navbar_btn %}{% endblock %}
+                    </span>
                 </div>
 
                 {#Buttons#}
                 <div class="d-flex justify-content-end my-2">
-                    <span>
-                        {% block navbar_btn %}{% endblock %}
-                    </span>
+
                     {% if user.is_authenticated %}
                         <span>
                             <a href="{% url 'add_critter' %}" class="btn btn-success ml-3">New Critter</a>
