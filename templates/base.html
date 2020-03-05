@@ -82,13 +82,15 @@
     </footer>
 
     <script>
-        const body_ele = document.getElementById("body");
-        const html_ele = document.getElementById("html");
-        const footer = document.getElementById("footer");
-        let new_height = html_ele.clientHeight - footer.clientHeight;
-        body_ele.style.height = new_height.toString();
-        console.log(body_ele.clientHeight);
-        console.log(new_height.toString());
+        $(document).ready(function(){
+            const body_ele = document.getElementById("body");
+            const html_ele = document.getElementById("html");
+            const footer = document.getElementById("footer");
+            let new_height = html_ele.clientHeight - footer.clientHeight;
+            body_ele.style.height = new_height.toString() + "px";
+            console.log(body_ele.clientHeight);
+            console.log(new_height.toString() + "px");
+        })
 
     </script>
 
