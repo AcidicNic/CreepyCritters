@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static 'base.css' %}">
     <title>{% block title %}{% endblock %}</title>
 </head><body id="body">
-    <div class='main_container'>
+    <div id='main_container'>
     {# Collapsable Hamburger Navbar#}
     <div class="pos-f-t sticky-top mb-4">
         <nav class="navbar navbar-dark bg-dark">
@@ -84,13 +84,13 @@
 
     <script>
         $(document).ready(function(){
-            const body_ele = document.getElementById("body");
+            const main_container = document.getElementById("main_container");
             const html_ele = document.getElementById("html");
             const footer = document.getElementById("footer");
             let new_height = html_ele.clientHeight - footer.clientHeight;
-            body_ele.style.height = new_height.toString() + "px";
+            main_container.style.height = new_height.toString() + "px";
             footer.style.bottom = "0px";
-            console.log(body_ele.clientHeight);
+            console.log(main_container.clientHeight);
             console.log(new_height.toString() + "px");
         })
     </script>
