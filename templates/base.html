@@ -9,12 +9,13 @@
     <script>
         function footerFix() {
             const body = $("#body");
+            const main = $("#main_container");
             const html_ele = $("#html");
             const footer = $("#footer");
             let new_height = html_ele.height() - footer.outerHeight(true);
             if (body.height() < html_ele.height()) {
-                body.css( "height", new_height + "px" );
-                footer.style.bottom = "0";
+                main.css( "height", new_height + "px" );
+                footer.css("bottom", "0");
             }
         }
         $(document).ready(function () {
